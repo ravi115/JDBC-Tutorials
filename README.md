@@ -18,8 +18,8 @@
               SQL Query( routine job in SQL query);
     - Example: [click here to see the stored procedure example](https://github.com/ravi115/JDBC-Tutorials/blob/master/Procedure_example.sql)
               
-              create procedure find_student()
-		          Select * from student;
+            		create procedure find_student()
+			Select * from student;
     - The above SQL procedure is the basic procedure. If we want to add some more information to it we can use below syntax (known as characteristics):  -
             
               COMMENT 'string'      
@@ -138,3 +138,97 @@
     - CallableStatement interface is used to call the _stored procedures and functions_.
     - [click here to see the complete code for CallableStatement](https://github.com/ravi115/JDBC-Tutorials/blob/master/JDBC-Tutorials/src/main/java/com/jdbc/tutorials/dao/CallableDAO.java).
   
+- **_Transaction Management in JDBC_**
+  - Transaction represents a single unit of work.
+  - The ACID properties describes the transaction management well. 
+  - **ACID** stands for Atomicity, Consistency, isolation and durability.
+	- **_Atomicity_** means either all successful or none.
+	- **_Consistency_** ensures bringing the database from one consistent state to another consistent state.
+	- **_Isolation_** ensures that transaction is isolated from other transaction.
+	- **_Durability_** means once a transaction has been committed, it will remain so, even in the event of errors, power loss etc.
+  - **Advantage of Transaction Mangaement**.
+	- fast performance It makes the performance fast because database is hit at the time of commit.
+
+  - ![see image](https://github.com/ravi115/JDBC-Tutorials/blob/master/JDBC-Tutorials/img_tr/Capture.PNG?raw=true "Title")
+  - see the below code: - 
+  	
+	**_commit_**
+	
+		import java.sql.*;  
+		
+		class FetchRecords{  
+		
+		public static void main(String args[])throws Exception{
+		
+			Class.forName("com.mysql.cj.jdbc.Driver");  
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/training","root","root");  
+			con.setAutoCommit(false);  
+
+			Statement stmt=con.createStatement();  
+			stmt.executeUpdate("insert into user420 values(190,'abhi',40000)");  
+			stmt.executeUpdate("insert into user420 values(191,'umesh',50000)");  
+
+			con.commit();  
+			con.close();  
+			}
+		}  
+		
+	**_RollBack_**
+
+			import java.sql.*;  
+			import java.io.*;  
+			
+			class TM{  
+			
+			public static void main(String args[]){  
+				try{  
+
+				Class.forName("com.mysql.cj.jdbc.Driver");  
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/training","root","root");  
+				con.setAutoCommit(false);  
+
+				PreparedStatement ps=con.prepareStatement("insert into user420 values(?,?,?)");  
+
+				BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+				while(true){  
+
+					System.out.println("enter id");  
+					String s1=br.readLine();  
+					int id=Integer.parseInt(s1);  
+
+					System.out.println("enter name");  
+					String name=br.readLine();  
+
+					System.out.println("enter salary");  
+					String s3=br.readLine();  
+					int salary=Integer.parseInt(s3);  
+
+					ps.setInt(1,id);  
+					ps.setString(2,name);  
+					ps.setInt(3,salary);  
+					ps.executeUpdate();  
+
+					System.out.println("commit/rollback");  
+					String answer=br.readLine();  
+					if(answer.equals("commit")){  
+					con.commit();  
+				}  
+				if(answer.equals("rollback")){  
+					con.rollback();  
+				}  
+				System.out.println("Want to add more records y/n");  
+				String ans=br.readLine();  
+				if(ans.equals("n")){  
+				break;  
+				}  
+
+				}  
+				con.commit();  
+				System.out.println("record successfully saved");  
+
+				con.close();//before closing connection commit() is called  
+				}catch(Exception e){System.out.println(e);}  
+
+				}
+			}
+
