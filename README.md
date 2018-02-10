@@ -232,3 +232,60 @@
 				}
 			}
 
+ - **_Batch Processing_**
+ 	- Instead of executing a single query, we can execute a batch (group) of queries. It makes the performance fast.
+	- The java.sql.Statement and java.sql.PreparedStatement interfaces provide methods for batch processing.
+	- We can also batch operation in callable statement (stored procedure).
+	- **Advantage of Batch Processing :** Fast Performance.
+	- [click here to see the complete code for batch processing.](https://github.com/ravi115/JDBC-Tutorials/blob/master/JDBC-Tutorials/src/main/java/com/jdbc/tutorials/dao/BatchDAO.java)
+
+ - **_Index_**
+ 	- A database index is a data structure that improves the speed of operations in a table.
+	- Practically, indexes are also a type of tables, which keep primary key or index field and a pointer to each record into the actual table.
+	- The users cannot see the indexes, they are just used to speed up queries and will be used by the Database Search Engine to locate records very fast.
+	- **Advantages:** - 
+		- the SELECT statements become fast on those tables. 
+
+	- **Disadvantages:** -
+		- The INSERT and UPDATE statements take more time on tables having indexes.
+		- The reason is that while doing insert or update, a database needs to insert or update the index values as well.
+
+	- In MySQL, An index can be created at the time of table creation using below syntax: - 
+			
+			CREATE TABLE person (
+			    last_name VARCHAR(50) NOT NULL,
+			    first_name VARCHAR(50) NOT NULL,
+			    INDEX (last_name, first_name)
+			);
+	- Note:  The _problem_ about this index type is that you have to query for the leftmost value to use the index. So, if your index has two columns, say last_name and first_name, the order that you query these fields matters a lot.
+	- CREATE INDEX enables to add indexes to existing tables. 
+	- A multiple-column index can be created using multiple columns.
+	- Syntax use to create index is : 
+	- CREATE INDEX [index name] ON [table name]([column name]);
+	- Create UNIQUE INDEX
+		- Using CREATE UNIQUE INDEX, you can create an unique index in MySQL.
+	- Example: - 
+	
+		CREATE  UNIQUE INDEX newautid ON newauthor(aut_id);
+		The above MySQL statement will create an UNIQUE INDEX on 'aut_id' column for 'newauthor' table.
+
+	- MySQL create UNIQUE INDEX with index type
+	- Create UNIQUE INDEX with index type
+	- In MySQL, you can specify the type of the INDEX with CREATE INDEX command to set a type for the index.
+	
+		CREATE  UNIQUE INDEX newautid ON newauthor(aut_id) USING BTREE;
+
+	- [click here to see complete example of JDBC Index](https://github.com/ravi115/JDBC-Tutorials/blob/master/JDBC-Tutorials/src/main/java/com/jdbc/tutorials/dao/IndexDAO.java)
+	
+ - **_JDBC Connection Pooling_**
+ 	- Connection pooling is a process where we maintain a cache of database connections.
+	- A connection pool operates by performing the work of creating connections ahead of time.
+	- In the case of a JDBC connection pool, a pool of Connection objects are created at the time the application server starts. 
+	- These objects are then managed by a pool manager that disperses connections as they are requested by clients and returns them to the pool when it determines the client is finished with the Connection object.
+	- When the connection pool server starts, it creates a predetermined number of Connection objects.
+	- [click here to see complete code JDBC Conncection Pool](https://github.com/ravi115/JDBC-Tutorials/blob/master/JDBC-Tutorials/src/main/java/com/jdbc/tutorials/pool/DBConnectionPool.java)
+
+ - **_JDBC IMAGE_STORE_**
+ 	- we can store and retrive the image to or from database.
+	- [click here to see how to store or retrive images from database](https://github.com/ravi115/JDBC-Tutorials/blob/master/JDBC-Tutorials/src/main/java/com/jdbc/tutorials/dao/ImageStoreDAO.java)
+
