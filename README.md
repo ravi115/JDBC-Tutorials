@@ -289,3 +289,35 @@
  	- we can store and retrive the image to or from database.
 	- [click here to see how to store or retrive images from database](https://github.com/ravi115/JDBC-Tutorials/blob/master/JDBC-Tutorials/src/main/java/com/jdbc/tutorials/dao/ImageStoreDAO.java)
 
+
+- ## **_Trigger_**
+	- A trigger is set of actions that run automatically when a specified change operations Like: SQL  Insert, update or delete are performed on some table.
+	- A trigger also handles the error. means if any error occurs before inserting then row won't get affected in actual table.
+	- **When to use trigger:** 
+		1. Enforce business rule.
+		2. validate input data.
+		3. log the activity happening on the particular table in some other table.
+	
+	- **we can configure or define a trigger with the help of below syntax**
+		1. Compound statements (BEGIN / END)
+		2. Variable declaration (DECLARE) and assignment (SET)
+		3. Flow-of-control statements (IF, CASE, WHILE, LOOP, REPEAT, LEAVE, ITERATE)
+		4. Condition declarations
+		5. Handler declarations
+	- **How to create a MySQL Trigger**
+		1. Trigger is a database object associated with a specified table and it gets activated when a specified event (Insert, update or delete) occurs.
+		2. the complete instruction to create a trigger:
+			
+			CREATE     
+			[DEFINER = { user | CURRENT_USER }]     
+			TRIGGER trigger_name     
+			trigger_time trigger_event     
+			ON tbl_name FOR EACH ROW     
+			trigger_body
+			trigger_time: { BEFORE | AFTER } 
+			trigger_event: { INSERT | UPDATE | DELETE }
+	
+	- within the schema the trigger name should be unique.
+	- basically we use BEFORE | AFTER Trigger command while defining the trigger for insert, update and delete events on a table.
+	- 
+			
