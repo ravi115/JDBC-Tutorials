@@ -319,16 +319,18 @@
 	
 	- A simple Example: 
 		
-		CREATE DEFINER=`root`@`localhost` trigger `account_trigger` AFTER INSERT on `account`
-		for each row
-		-- define the trigger body
-			BEGIN
+		
+			CREATE DEFINER=`root`@`localhost` trigger `account_trigger` AFTER INSERT on `account`
+			for each row
+			-- define the trigger body
+				BEGIN
 
-		    insert into `account_log` (`id`, `first_name`, `last_name`, `email_Id`, `salary`, `LOG_ACTIVITY` , `LOG_TIMESTAMP`) 
-		    values(new.id, new.first_name, new.last_name, new.email_Id, new.salary, 'This is an insert log activity', now());
+			    insert into `account_log` (`id`, `first_name`, `last_name`, `email_Id`, `salary`, `LOG_ACTIVITY` , `LOG_TIMESTAMP`) 
+			    values(new.id, new.first_name, new.last_name, new.email_Id, new.salary, 'This is an insert log activity', now());
 
-		    END
-    
+			    END
+    		
+		
 	- within the schema the trigger name should be unique.
 	- basically we use BEFORE | AFTER Trigger command while defining the trigger for insert, update and delete events on a table.
 	- In the above example, there is new keyword 'NEW' which is a MySQL extension to triggers. There is two MySQL extension to triggers 'OLD' and 'NEW'. OLD and NEW are not case sensitive.
