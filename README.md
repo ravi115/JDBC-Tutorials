@@ -317,7 +317,29 @@
 			trigger_time: { BEFORE | AFTER } 
 			trigger_event: { INSERT | UPDATE | DELETE }
 	
+	- A simple Example: 
+		
+		CREATE DEFINER=`root`@`localhost` trigger `account_trigger` AFTER INSERT on `account`
+		for each row
+		-- define the trigger body
+			BEGIN
+
+		    insert into `account_log` (`id`, `first_name`, `last_name`, `email_Id`, `salary`, `LOG_ACTIVITY` , `LOG_TIMESTAMP`) 
+		    values(new.id, new.first_name, new.last_name, new.email_Id, new.salary, 'This is an insert log activity', now());
+
+		    END
+    
 	- within the schema the trigger name should be unique.
 	- basically we use BEFORE | AFTER Trigger command while defining the trigger for insert, update and delete events on a table.
-	- 
+	- In the above example, there is new keyword 'NEW' which is a MySQL extension to triggers. There is two MySQL extension to triggers 'OLD' and 'NEW'. OLD and NEW are not case sensitive.
+
+	- Within the trigger body, the OLD and NEW keywords enable you to access columns in the rows affected by a trigger
+	- In an INSERT trigger, only NEW.col_name can be used.
+	- In a UPDATE trigger, you can use OLD.col_name to refer to the columns of a row before it is updated and NEW.col_name to refer to the columns of the row after it is updated.
+	- In a DELETE trigger, only OLD.col_name can be used; there is no new row.
+	- The `Before` trigger is used to perform some operation on input before storing it to the actual table.
+	- **TO DELETE The Trigger**
+		1. To delete or destroy a trigger, use a DROP TRIGGER statement. You must specify the schema name if the trigger is not 		in the default (current) schema :
+  		2. DROP TRIGGER [IF EXISTS] [schema_name.]trigger_nam
+		3. if you drop a table, any triggers for the table are also dropped.
 			
