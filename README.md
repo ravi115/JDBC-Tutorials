@@ -345,4 +345,4 @@
   		2. DROP TRIGGER [IF EXISTS] [schema_name.]trigger_nam
 		3. if you drop a table, any triggers for the table are also dropped.
 			
-		- [https://github.com/ravi115/JDBC-Tutorials/blob/master/tigger.sql]( click here to check complete trigger sql query).
+		- [ click here to check complete trigger sql query](https://github.com/ravi115/JDBC-Tutorials/blob/master/tigger.sql).
