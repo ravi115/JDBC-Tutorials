@@ -17,4 +17,14 @@
 
             service postgresql start
  
+5. Connecto to postgres.
+
+            sudo -u postgres psql
+        
+6. To create database: 
+
+            create database <database_name>
             
+7. To display database:
+            
+               \l
