@@ -1,1 +1,20 @@
-#This is postgres database installation on ubuntu machine.
+### This is postgres database installation on ubuntu machine.
+
+1. Go to su mode.
+    
+        sudo su -
+
+2. Run the below command to install the postgress | if not logged in as root user then append **sudo** in the installation cmd.
+
+            apt-get update
+            apt-get install postgresql postgresql-contrib
+          
+3. configure the postgres as service.
+
+            update-rc.d postgresql enable
+
+4. start service as deamon.
+
+            service postgresql start
+ 
+            
