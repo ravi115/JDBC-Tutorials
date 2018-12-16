@@ -1,6 +1,6 @@
 ## This tutorial shows how to create trigger in postgres database.
 
-**Let's understand this trigger concept by simple example**
+**Let's understand this trigger concept with simple example**
 
 - create a table called user having three fields mainly, id, username, password.
 
@@ -29,6 +29,10 @@
         $$ LANGUAGE plpgsql;
 
   - In the above stored procedure, we can see that the trigger name is **_password_change_** with which postgres will generate then trigger notification.
+  - The postgres generates asynchronous notification the below defined formate in the above stored procedure.
+            - user$update$password$<new_password>
+            - user$delete$password$<old_password>
+            - user$insert$password$<new_password>
   
   - Below code creates the actual trigger on the table user.
   
